@@ -1,0 +1,1 @@
+fp.namespace('pages').$module = angular.module('fp.pages', []);

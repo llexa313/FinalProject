@@ -1,0 +1,1 @@
+fp.namespace('services').$module = angular.module('fp.services', []);
