@@ -1,0 +1,1 @@
+fp.namespace('directives').$module = angular.module('fp.directives', []);

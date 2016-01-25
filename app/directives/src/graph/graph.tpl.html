@@ -1,0 +1,11 @@
+<svg class="graph">
+    <line ng-repeat="point in points" ng-if="$index > 0"
+          ng-attr-x1="{{ points[$index - 1].x }}%"
+          ng-attr-y1="{{ points[$index - 1].y }}%"
+          ng-attr-x2="{{ point.x }}%"
+          ng-attr-y2="{{ point.y }}%"
+          stroke="black"
+          stroke-width="2"/>
+    <circle ng-repeat="point in points" r="3" stroke="black" stroke-width="3" fill="red"
+            ng-attr-cx="{{ point.x }}%" ng-attr-cy="{{ point.y }}%" />
+</svg>

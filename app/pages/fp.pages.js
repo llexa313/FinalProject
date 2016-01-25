@@ -1,1 +1,1 @@
-fp.namespace('pages').$module = angular.module('fp.pages', []);
+fp.namespace('pages').$module = angular.module('fp.pages', [ 'fp.directives', 'fp.services' ]);

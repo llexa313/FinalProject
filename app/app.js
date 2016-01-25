@@ -5,7 +5,6 @@ var FinalProject = function() {
         'ui.router',
         'pascalprecht.translate',
         'ngSanitize',
-        'fp.services',
         'fp.pages'
     ]);
 };

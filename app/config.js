@@ -13,7 +13,6 @@ fp.$module.config(
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise("/");
 
-        console.log(fp.pages.dashboard.controller);
         // Now set up the states
         $stateProvider
             .state('dashboard', {
