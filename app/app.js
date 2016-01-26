@@ -1,17 +1,9 @@
 'use strict';
 
-var FinalProject = function() {
-    this.$module = angular.module('task3', [
-        'ui.router',
-        'pascalprecht.translate',
-        'ngSanitize',
-        'fp.pages'
-    ]);
-};
 
-FinalProject.prototype.namespace = function(namespace) {
+var namespace = function(namespace) {
     var parts = namespace.split('.'),
-        parent = this;
+        parent = window;
 
     for (var i = 0; i < parts.length; i++) {
         var part = parts[i];
@@ -26,4 +18,11 @@ FinalProject.prototype.namespace = function(namespace) {
     return parent;
 };
 
-var fp = new FinalProject();
+namespace('fp');
+
+fp.$module = angular.module('task3', [
+    'ui.router',
+    'pascalprecht.translate',
+    'ngSanitize',
+    'fp.pages'
+]);

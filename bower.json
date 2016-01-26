@@ -1,12 +1,13 @@
 {
   "name": "FinalProject",
   "dependencies": {
-    "angular": "1.4.8",
-    "angular-sanitize": "1.4.8",
+    "angular": "1.4.x",
+    "angular-sanitize": "1.4.x",
     "bootstrap": "3.3.6",
     "lodash": "4.0.0",
     "ui-router": "0.2.15",
     "angular-translate": "2.8.1",
-    "angular-translate-loader-static-files": "~2.8.1"
+    "angular-translate-loader-static-files": "~2.8.1",
+    "angular-animate": "1.4.9"
   }
 }

@@ -1,15 +1,27 @@
-'use strict';
-var ns = fp.namespace('pages.dashboard');
+(function() {
+    'use strict';
 
-ns.controller = function($scope, currency) {
-    currency.get().then(function(response) {
-        $scope.currencies = response.data;
-    }, function() {
-        //TODO exception handling
-    });
-};
+    var ns = namespace('fp.pages.dashboard');
 
-fp.pages.$module.controller('dashboardCtrl', [
-    '$scope', 'currency',
-    ns.controller
-]);
+    ns.controller = function($scope, currency) {
+        this.newPointsCallback = function(event) {
+            var incomingMessage = event.data,
+                data = JSON.parse(incomingMessage);
+
+            $scope.$apply(function() {
+                $scope.currencies.push(data);
+            });
+        };
+
+        currency.get(this.newPointsCallback).then(function(response) {
+            $scope.currencies = response.data;
+        }, function() {
+            //TODO exception handling
+        });
+    };
+
+    fp.pages.$module.controller('dashboardCtrl', [
+        '$scope', 'currency',
+        ns.controller
+    ]);
+})(angular);
