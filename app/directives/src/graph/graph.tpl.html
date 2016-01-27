@@ -21,9 +21,9 @@
                 <g ng-repeat="label in labels.x">
                     <line y1="94%" y2="96%"
                           ng-if="!$first"
-                          ng-attr-x1="{{ 1 + label.left }}%"
-                          ng-attr-x2="{{ 1 + label.left }}%" />
-                    <text ng-attr-x="{{  getX($index / ( labels.x.length - 1)) }}%" y="99%" >
+                          ng-attr-x1="{{ label.left }}%"
+                          ng-attr-x2="{{ label.left }}%" />
+                    <text ng-attr-x="{{  ($first ? 1 : -1) + getX($index / ( labels.x.length - 1)) }}%" y="99%" >
                         {{ label.text }}
                     </text>
                 </g>

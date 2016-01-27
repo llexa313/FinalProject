@@ -4,9 +4,8 @@
     var ns = namespace('fp.directives.graph');
 
     ns.controller = function ($scope, MAX_POINTS, X_AXIS_LABELS, Y_AXIS_LABELS) {
-        $scope.max = {};
-        $scope.min = {};
-        $scope.delta = {}
+        $scope.x = {};
+        $scope.y = {};
         $scope.points = [];
         $scope.labels = { x: [], y: [] };
 
@@ -15,7 +14,7 @@
         };
 
         $scope.pointY = function (point) {
-            return $scope.getY(point.y / $scope.delta.y);
+            return $scope.getY(point.y / $scope.y.delta);
         };
 
         $scope.getX = function (x) {
@@ -23,7 +22,7 @@
         };
 
         $scope.pointX = function (point) {
-            return $scope.getX(point.x / $scope.delta.x);
+            return $scope.getX(point.x / $scope.x.delta);
         };
 
         $scope.$watch('data', function (points) {
@@ -32,19 +31,23 @@
                     points = _.drop(points, points.length - MAX_POINTS);
                 }
 
-                $scope.min.x = _.minBy(points, 'x').x;
-                $scope.min.y = _.minBy(points, 'y').y;
+                $scope.x = {
+                    min: _.minBy(points, 'x').x,
+                    max: _.maxBy(points, 'x').x
+                };
 
-                $scope.max.x = _.maxBy(points, 'x').x;
-                $scope.max.y = _.maxBy(points, 'y').y;
+                $scope.y = {
+                    min: _.minBy(points, 'y').y,
+                    max: _.maxBy(points, 'y').y
+                };
 
-                $scope.delta.x = $scope.max.x - $scope.min.x;
-                $scope.delta.y = $scope.max.y - $scope.min.y;
+                $scope.x.delta = $scope.x.max - $scope.x.min;
+                $scope.y.delta = $scope.y.max - $scope.y.min;
 
                 points.forEach(function (p, i) {
                     var item = {
-                        x: p.x - $scope.min.x,
-                        y: p.y - $scope.min.y
+                        x: p.x - $scope.x.min,
+                        y: p.y - $scope.y.min
                     };
 
                     if (!$scope.points[i] || i >= $scope.points.length - 1) {
@@ -56,35 +59,44 @@
             }
         }, true);
 
-        $scope.$watch('delta.x', function (value) {
-            var tickX = value / X_AXIS_LABELS;
-            for (var i = 0; i < X_AXIS_LABELS + 1; i++) {
-                var item = {
-                    left: $scope.getX(i / X_AXIS_LABELS),
-                    text: _.round($scope.min.x + tickX * i, 0)
-                };
-                if ($scope.labels.x[i]) {
-                    _.assign($scope.labels.x[i], item);
-                } else {
-                    $scope.labels.x[i] = item
+        $scope.$watch('x', function (value) {
+            if (value && value.delta != undefined) {
+                var tickX = value.delta / X_AXIS_LABELS;
+                for (var i = 0; i < X_AXIS_LABELS + 1; i++) {
+                    var item = {
+                        left: $scope.getX(i / X_AXIS_LABELS),
+                        text: _.round($scope.x.min + tickX * i, 0)
+                    };
+                    if ($scope.labels.x[i]) {
+                        _.assign($scope.labels.x[i], item);
+                    } else {
+                        $scope.labels.x[i] = item
+                    }
                 }
-            }
-        });
 
-        $scope.$watch('delta.y', function (value) {
-            var tickY = value / Y_AXIS_LABELS;
-            for (var i = 0; i < Y_AXIS_LABELS + 1; i++) {
-                var item = {
-                    top: $scope.getY(i / Y_AXIS_LABELS),
-                    text: _.round($scope.min.y + tickY * i, 0)
-                };
-                if ($scope.labels.y[i]) {
-                    _.assign($scope.labels.y[i], item);
-                } else {
-                    $scope.labels.y[i] = item
+                if ($scope.labels.x.length) {
+                    var last = $scope.labels.x[$scope.labels.x.length - 1];
+                    console.log(last.text)
                 }
             }
-        });
+        }, true);
+
+        $scope.$watch('y', function (value) {
+            if (value && value.delta != undefined) {
+                var tickY = value.delta / Y_AXIS_LABELS;
+                for (var i = 0; i < Y_AXIS_LABELS + 1; i++) {
+                    var item = {
+                        top: $scope.getY(i / Y_AXIS_LABELS),
+                        text: _.round(value.min + tickY * i, 0)
+                    };
+                    if ($scope.labels.y[i]) {
+                        _.assign($scope.labels.y[i], item);
+                    } else {
+                        $scope.labels.y[i] = item
+                    }
+                }
+            }
+        }, true);
     };
 
     ns.directive = function () {
