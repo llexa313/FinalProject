@@ -1,17 +1,4 @@
 <svg class="graph">
-    <g class="series">
-        <line ng-repeat="point in points"
-              ng-if="$index > 0"
-              ng-attr-x1="{{ pointX(points[$index - 1]) }}%"
-              ng-attr-y1="{{ pointY(points[$index - 1]) }}%"
-              ng-attr-x2="{{ pointX(point) }}%"
-              ng-attr-y2="{{ pointY(point) }}%"/>
-    </g>
-    <g class="circles">
-        <circle ng-repeat="point in points"
-                ng-attr-cx="{{ pointX(point) }}%"
-                ng-attr-cy="{{ pointY(point) }}%"/>
-    </g>
     <g class="axis">
         <g class="x">
             <line class="x-axis" x1="0" y1="95%" x2="100%" y2="95%" />
@@ -19,7 +6,7 @@
             <line class="bottom" x1="99%" y1="96%" x2="100%" y2="95%" />
             <g class="labels">
                 <g ng-repeat="label in labels.x">
-                    <line y1="94%" y2="96%"
+                    <line y1="0%" y2="95%"
                           ng-if="!$first"
                           ng-attr-x1="{{ label.left }}%"
                           ng-attr-x2="{{ label.left }}%" />
@@ -36,7 +23,7 @@
             <line class="right" x1="5.5%" y1="3%" x2="5%" y2="0%" />
             <g class="labels">
                 <g ng-repeat="label in labels.y" >
-                    <line x1="4.5%" x2="5.5%"
+                    <line x1="5%" x2="100%"
                           ng-if="!$first && !$last"
                           ng-attr-y1="{{ 2 + label.top }}%"
                           ng-attr-y2="{{ 2 + label.top }}%" />
@@ -45,6 +32,16 @@
                     </text>
                 </g>
             </g>
+        </g>
+    </g>
+    <g class="series">
+        <g ng-repeat="serie in series" class="{{ serie.approximates ? 'approximates' : '' }}">
+            <line ng-repeat="point in serie.points"
+                  ng-if="$index > 0"
+                  ng-attr-x1="{{ pointX(serie.points[$index - 1]) }}%"
+                  ng-attr-y1="{{ pointY(serie.points[$index - 1]) }}%"
+                  ng-attr-x2="{{ pointX(point) }}%"
+                  ng-attr-y2="{{ pointY(point) }}%"/>
         </g>
     </g>
 </svg>

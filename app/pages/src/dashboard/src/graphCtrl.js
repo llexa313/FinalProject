@@ -3,12 +3,7 @@
 
     var ns = namespace('fp.pages.dashboard');
 
-    ns.$module = angular.module('fp.pages.dashboard', [
-        'fp.services',
-        'fp.pages.dashboard.graph',
-        'fp.pages.dashboard.profile.view',
-        'fp.pages.dashboard.profile.edit'
-    ]);
+    ns.$module = angular.module('fp.pages.dashboard.graph', [ 'fp.services' ]);
 
     ns.controller = function($scope, currency) {
         this.newPointsCallback = function(event) {
@@ -18,6 +13,7 @@
             $scope.$apply(function() {
                 $scope.currencies.push(data);
             });
+            console.log(incomingMessage);
         };
 
         currency.get(this.newPointsCallback).then(function(response) {
@@ -27,7 +23,7 @@
         });
     };
 
-    fp.pages.$module.controller('dashboardCtrl', [
+    fp.pages.$module.controller('graphCtrl', [
         '$scope', 'currency',
         ns.controller
     ]);

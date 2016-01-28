@@ -1,0 +1,13 @@
+<form novalidate name="form" class="form-signin">
+    <h2 translate="signIn.title"></h2>
+
+    <label for="login" translate="common.login"></label>
+    <input id="login" ng-model="user.login" class="form-control" translate translate-attr-placeholder="common.login" required autofocus min="3" ng-trim="false">
+
+    <label for="inputPassword" translate="signIn.password"></label>
+    <input type="password" id="inputPassword" ng-model="user.password" class="form-control" translate translate-attr-placeholder="signIn.password" required min="3" ng-trim="false">
+
+    <a ui-sref="^.forgot" class="pull-right" translate="common.forgot"></a>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="form.$invalid" ng-click="login()" translate="signIn.title"></button>
+</form>

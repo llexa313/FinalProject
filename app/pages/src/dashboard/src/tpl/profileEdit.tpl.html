@@ -1,0 +1,36 @@
+<form novalidate name="form" class="form-horizontal">
+
+    <div class="form-group has-feedback" ng-class="form.name.$dirty && form.name.$invalid ? 'has-error' : 'has-success'">
+        <label for="name" class="col-sm-2 control-label" translate="profile.name"></label>
+        <div class="col-sm-10">
+            <input ng-model="user.name" ng-trim="false" name="name" full-name class="form-control" id="name">
+            <span ng-show="form.name.$dirty" ng-class="form.name.$invalid ? 'glyphicon-remove' : 'glyphicon-ok'" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <div ng-show="form.name.$dirty && form.name.$error.fullName" class="help-block" translate="profile.edit.nameError"></div>
+        </div>
+    </div>
+
+    <div class="form-group has-feedback" ng-class="[ form.age.$dirty && form.age.$invalid ? 'has-error' : 'has-success' ]">
+        <label for="age" class="col-sm-2 control-label" translate="profile.age"></label>
+        <div class="col-sm-10">
+            <input ng-model="user.age" ng-trim="false" name="age" age class="form-control" id="age">
+            <span ng-show="form.age.$dirty" ng-class="form.age.$invalid ? 'glyphicon-remove' : 'glyphicon-ok'" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <div ng-show="form.age.$dirty && form.age.$error.age" class="help-block" translate="profile.edit.ageError"></div>
+        </div>
+    </div>
+
+    <div class="form-group has-feedback" ng-class="[ form.birthdate.$dirty && form.birthdate.$invalid ? 'has-error' : 'has-success' ]">
+        <label for="birthdate" class="col-sm-2 control-label" translate="profile.birthdate"></label>
+        <div class="col-sm-10">
+            <input ng-model="user.birthdate" ng-trim="false" name="birthdate" birthdate class="form-control" id="birthdate">
+            <span ng-show="form.birthdate.$dirty" ng-class="form.birthdate.$invalid ? 'glyphicon-remove' : 'glyphicon-ok'" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <div ng-show="form.birthdate.$dirty && form.birthdate.$error.birthdate" class="help-block" translate="profile.edit.birthdateError"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" ng-click="submit()" ng-disabled="!form.$dirty || form.$invalid" translate="profile.edit.submit"></button>
+            <button type="reset" class="btn btn-default" ng-click="reset(form)" translate="profile.edit.reset"></button>
+        </div>
+    </div>
+</form>

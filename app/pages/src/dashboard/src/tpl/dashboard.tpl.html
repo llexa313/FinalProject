@@ -1,1 +1,10 @@
-<graph data="currencies"/>
+<div class="dashboard">
+    <div class="menu">
+        <h2 translate="dashboard.title"></h2>
+
+        <a ui-sref=".graph" ui-sref-active="active" class="" translate="dashboard.graph"></a>
+        <a ui-sref=".viewProfile" ui-sref-active="active" class="" translate="dashboard.profile.view"></a>
+        <a ui-sref=".editProfile" ui-sref-active="active" class="" translate="dashboard.profile.edit"></a>
+    </div>
+    <div class="content" ui-view />
+</div>

@@ -1,0 +1,13 @@
+<div class="auth-container">
+    <div class="bg-primary loading {{ isHttpPending() ? '' : 'hide-visibility' }}" translate="common.loading"></div>
+    <div class="{{ isHttpPending() ? 'disabled' : '' }}" >
+        <div class="pull-right switch-lang">
+            <span ng-show="lang !== 'ru'" ng-click="switchLang('ru')" class="btn btn-default btn-sm">Русский</span>
+            <span ng-show="lang !== 'en'" ng-click="switchLang('en')" class="btn btn-default btn-sm">English</span>
+            <a ng-show="isSigned()" ng-click="signOut()" class="btn btn-default pull-right sign-out btn-sm" translate="profile.signOut"></a>
+        </div>
+        <div class="bg-info message">{{ message }}</div>
+
+        <ui-view class="main-content"/>
+    </div>
+</div>

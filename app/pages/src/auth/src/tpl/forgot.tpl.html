@@ -1,0 +1,8 @@
+<form novalidate class="form-forgot-password" name="form">
+    <h2 translate="common.forgot"></h2>
+
+    <label for="name" class="sr-only" translate="common.login"></label>
+    <input id="name" ng-model="user.login" class="form-control" translate translate-attr-placeholder="common.login" required autofocus min="3">
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="submit()" ng-disabled="form.$invalid" translate="forgot.submit"></button>
+</form>
