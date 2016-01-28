@@ -16,13 +16,19 @@ var app = express(),
     PAUSE_DELAY = 1000,
     sessions = {},
     wss = new WebSocketServer({ port: 8081 }),
-    currency = new Data.Currency('currenciesData', 10),
+    currency = new Data.Currency('currenciesData', 50),
     users = new Data.User('user');
 
 
 // configuration =================
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+// set the static files location /
+app.use('/', express.static('./public'));
+app.use('/components', express.static('./bower_components'));
+app.use('/app', express.static('app'));
+app.use('/lang', express.static('./lang'));
 
 wss.on('connection', function(ws) {
     var id = Math.random();
@@ -49,13 +55,7 @@ wss.broadcast = function broadcast(data) {
     });
 };
 
-// set the static files location /
-app.use('/', express.static('./public'));
-app.use('/components', express.static('./bower_components'));
-app.use('/app', express.static('app'));
-app.use('/lang', express.static('./lang'));
-
-app.get('/api/currencies', function(req, res) {
+app.get('/api/currencies', pause(PAUSE_DELAY), function(req, res) {
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
     res.send(currency.getData());
 });

@@ -6,5 +6,5 @@
         <a ui-sref=".viewProfile" ui-sref-active="active" class="" translate="dashboard.profile.view"></a>
         <a ui-sref=".editProfile" ui-sref-active="active" class="" translate="dashboard.profile.edit"></a>
     </div>
-    <div class="content" ui-view />
+    <div ng-class="{ content: true, disabled: isHttpPending() }" ui-view />
 </div>

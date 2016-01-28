@@ -8,17 +8,17 @@
     ns.$module.controller('ProfileEditCtrl', ['$scope', 'user', '$state', function($scope, user, $state) {
         var loadedUser;
         if (!user.isSignedIn()) {
-            $state.go('main.signin', { message: {
+            return $state.go('main.auth.signin', { message: {
                 tpl: 'notAuthorized'
             }});
-        } else {
-            user.get(function(user) {
-                $scope.user = user;
-                loadedUser = user;
-            }, function() {
-                //TODO: add exception handling
-            })
         }
+
+        user.get(function(user) {
+            $scope.user = user;
+            loadedUser = user;
+        }, function() {
+            //TODO: add exception handling
+        });
 
         $scope.reset = function(form) {
             form && form.$setPristine();

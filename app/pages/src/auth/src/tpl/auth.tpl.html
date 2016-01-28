@@ -1,5 +1,4 @@
 <div class="auth-container">
-    <div class="bg-primary loading {{ isHttpPending() ? '' : 'hide-visibility' }}" translate="common.loading"></div>
     <div class="{{ isHttpPending() ? 'disabled' : '' }}" >
         <div class="pull-right switch-lang">
             <span ng-show="lang !== 'ru'" ng-click="switchLang('ru')" class="btn btn-default btn-sm">Русский</span>

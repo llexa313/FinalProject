@@ -7,7 +7,7 @@
 
     ns.$module.controller('ProfileViewCtrl', ['$scope', 'user', '$state', function($scope, user, $state) {
         if (!user.isSignedIn()) {
-            $state.go('main.auth.signin', { message: {
+            return $state.go('main.auth.signin', { message: {
                 tpl: 'notAuthorized'
             }});
         }

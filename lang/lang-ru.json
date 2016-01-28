@@ -11,6 +11,14 @@
       "passwordSent": "Ваш новый пароль: {{ newPassword }}"
     }
   },
+  "dashboard": {
+    "title": "Главная",
+    "graph": "График",
+    "profile": {
+      "view": "Профиль",
+      "edit": "Редактирование"
+    }
+  },
   "signIn": {
     "title": "Войти",
     "password": "Пароль"

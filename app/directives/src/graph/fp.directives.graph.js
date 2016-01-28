@@ -159,8 +159,8 @@
     ns.$module = angular.module('fp.directives.graph', [])
         .directive('graph', ns.directive)
         .constant('CONFIG', {
-            APPROXIMATION_STEP: 10,
-            MAX_POINTS: 100,
+            APPROXIMATION_STEP: 5,
+            MAX_POINTS: 50,
             X_AXIS_LABELS: 4,
             Y_AXIS_LABELS: 4
         })
