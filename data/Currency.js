@@ -3,7 +3,7 @@ var NodeCache = require( "node-cache"),
 
 var Currency = function(cacheKey, count) {
     this.key = cacheKey;
-    this.nextIndex = 0;
+    this.lastX = 0;
 
     this.generateData(count);
 };
@@ -24,7 +24,8 @@ Currency.prototype.getData = function() {
 
 Currency.prototype.generatePoint = function(x) {
     if (!x) {
-        x = this.nextIndex++;
+        x = this.lastX + 1 + Math.round(Math.random() * 10);
+        this.lastX = x;
     }
 
     return { x: x, y: Math.round(Math.random() * 1000) };

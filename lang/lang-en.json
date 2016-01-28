@@ -1,3 +1,46 @@
 {
+  "common": {
+    "login": "Login",
+    "forgot": "Forgot password",
+    "loading": "Loading please wait...",
+    "messages": {
+      "sessionTimeout": "Session was ended by timeout",
+      "profileUpdated": "Profile was successfully updated",
+      "notAuthorized": "You are not authorized, please sign in",
+      "invalidPassword": "Invalid user or password",
+      "passwordSent": "Your new password is: {{ newPassword }}"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "graph": "Graph",
+    "profile": {
+      "view": "View profile",
+      "edit": "Edit profile"
+    }
+  },
+  "signIn": {
+    "title": "Sign in",
+    "password": "Password"
+  },
+  "forgot": {
+    "submit": "Send me new password"
+  },
+  "profile": {
+    "title": "Your profile",
+    "signOut": "Sign out",
+    "name": "Name",
+    "age": "Age",
+    "birthdate": "Birthdate",
+    "viewPageName": "View",
+    "editPageName": "Edit",
 
+    "edit": {
+      "nameError": "Name must contain 2 words in english with first uppercase letters",
+      "ageError": "Age must be integer between 18 and 60",
+      "birthdateError": "Date must be correct and inputs in format 'DD MMM YYYY'",
+      "submit": "Submit",
+      "reset": "Reset"
+    }
+  }
 }
