@@ -13,20 +13,19 @@
             }});
         }
 
-        user.get(function(user) {
-            $scope.user = user;
-            loadedUser = user;
+        user.get().then(function(response) {
+            $scope.user = response.data;
+            loadedUser = response.data;
         }, function() {
             //TODO: add exception handling
         });
 
         $scope.reset = function(form) {
             form && form.$setPristine();
-            $scope.user = loadedUser;
         };
         $scope.submit = function() {
-            user.update($scope.user, function() {
-                $state.go('main.profile.show', { message: {
+            user.update($scope.user).then(function() {
+                $state.go('^.viewProfile', { message: {
                     tpl: 'profileUpdated'
                 }});
             }, function() {

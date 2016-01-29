@@ -8,13 +8,19 @@
         $scope.user = {};
 
         $scope.login = function() {
-            user.signIn($scope.user, function(){
-                $state.go('main.dashboard.viewProfile');
-            }, function(e) {
-                $state.transitionTo($state.current, { message: {
-                    tpl: e
-                }});
-            });
+            var reject =  function(e) {
+                $scope.setMessage({ tpl: 'invalidPassword' });
+            };
+
+            user.signIn($scope.user).then(
+                function(response) {
+                    if (response && response.data && response.data.success) {
+                        $state.go('main.dashboard.viewProfile');
+                    } else {
+                        reject();
+                    }
+                },
+                reject);
         };
     }]);
 

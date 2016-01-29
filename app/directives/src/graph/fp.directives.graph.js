@@ -7,15 +7,9 @@
         $scope.x = {};
         $scope.y = {};
         $scope.series = [
-            {
-                points: []
-            },
-            {
-                approximates: true,
-                points: []
-            }
+            { points: [] },
+            { approximates: true, points: [] }
         ];
-        //$scope.points = [];
         $scope.labels = { x: [], y: [] };
 
         $scope.getY = function (y) {
@@ -27,17 +21,20 @@
         };
 
         $scope.getX = function (x) {
-            return 5 + 85 * x;
+            return 5 + 93 * x;
         };
 
         $scope.pointX = function (point) {
             return $scope.getX(point.x / $scope.x.delta);
         };
 
-        $scope.$watch('data', function (points) {
-            if (_.isArray(points)) {
+        $scope.$watch('data', function (dataPoints) {
+            if (_.isArray(dataPoints)) {
+                var points = dataPoints,
+                    dropCount = 0;
                 if (points.length > CONFIG.MAX_POINTS) {
-                    points = _.drop(points, points.length - CONFIG.MAX_POINTS);
+                    dropCount = points.length - CONFIG.MAX_POINTS;
+                    points = _.drop(points, dropCount);
                 }
 
                 $scope.x = {
@@ -60,7 +57,7 @@
                             x: p.x - $scope.x.min,
                             y: p.y - $scope.y.min
                         },
-                        aprox = $scope.getLastAverage(points, i, CONFIG.APPROXIMATION_STEP);
+                        aprox = $scope.getLastAverage(dataPoints, i + dropCount, $scope.approximation);
 
                     if (aprox) { approximation.push(aprox); }
 
@@ -90,10 +87,11 @@
 
         $scope.$watch('x', function (value) {
             if (value && value.delta != undefined) {
-                var tickX = value.delta / CONFIG.X_AXIS_LABELS;
-                for (var i = 0; i < CONFIG.X_AXIS_LABELS + 1; i++) {
+                var xLabels = CONFIG.X_AXIS_LABELS;
+                var tickX = value.delta / xLabels;
+                for (var i = 0; i < xLabels + 1; i++) {
                     var item = {
-                        left: $scope.getX(i / CONFIG.X_AXIS_LABELS),
+                        left: $scope.getX(i / xLabels),
                         text: _.round($scope.x.min + tickX * i, 0)
                     };
                     if ($scope.labels.x[i]) {
@@ -127,12 +125,17 @@
         }, true);
 
         $scope.getLastAverage = function(array, index, count) {
-            if (_.isArray(array) && index >= count - 1) {
+            if (_.isArray(array)) {
                 var values = { x: 0, y: 0 };
 
                 for(var i = index; i > index - count; i--) {
                     values.x += array[i].x;
                     values.y += array[i].y;
+
+                    if (i == 0) {
+                        count = 1 + index - i;
+                        break;
+                    }
                 }
 
                 var item = {
@@ -148,8 +151,11 @@
     ns.directive = function () {
         return {
             restrict: 'E',
+            replace: true,
             scope: {
-                data: '='
+                data: '=',
+                color: '=',
+                approximation: '='
             },
             controller: ['$scope', 'CONFIG', ns.controller],
             templateUrl: 'app/directives/src/graph/graph.tpl.html'
@@ -159,8 +165,7 @@
     ns.$module = angular.module('fp.directives.graph', [])
         .directive('graph', ns.directive)
         .constant('CONFIG', {
-            APPROXIMATION_STEP: 5,
-            MAX_POINTS: 50,
+            MAX_POINTS: 500,
             X_AXIS_LABELS: 4,
             Y_AXIS_LABELS: 4
         })

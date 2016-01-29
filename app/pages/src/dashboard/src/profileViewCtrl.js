@@ -12,8 +12,8 @@
             }});
         }
 
-        user.get(function(response) {
-            $scope.user = response;
+        user.get().then(function(response) {
+            $scope.user = response.data;
         }, function() {
             //TODO: add exception handling
         })

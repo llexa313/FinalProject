@@ -8,6 +8,7 @@
       "profileUpdated": "Profile was successfully updated",
       "notAuthorized": "You are not authorized, please sign in",
       "invalidPassword": "Invalid user or password",
+      "noSuchUser": "User not exist",
       "passwordSent": "Your new password is: {{ newPassword }}"
     }
   },

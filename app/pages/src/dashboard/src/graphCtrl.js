@@ -6,18 +6,22 @@
     ns.$module = angular.module('fp.pages.dashboard.graph', [ 'fp.services' ]);
 
     ns.controller = function($scope, currency, user, $state) {
-        if (!user.isSignedIn()) {
-            return $state.go('main.auth.signin', { message: {
-                tpl: 'notAuthorized'
-            }});
-        }
+        //if (!user.isSignedIn()) {
+        //    return $state.go('main.auth.signin', { message: {
+        //        tpl: 'notAuthorized'
+        //    }});
+        //}
 
         this.newPointsCallback = function(event) {
+            console.log('ws event');
+
             var incomingMessage = event.data,
                 data = JSON.parse(incomingMessage);
 
             $scope.$apply(function() {
-                $scope.currencies.push(data);
+                if ($scope.currencies) {
+                    $scope.currencies.push(data);
+                }
             });
         };
 
@@ -25,6 +29,11 @@
             $scope.currencies = response.data;
         }, function() {
             //TODO exception handling
+        });
+
+
+        $scope.$on('$destroy', function() {
+            currency.closeWS();
         });
     };
 

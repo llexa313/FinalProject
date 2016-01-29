@@ -3,31 +3,17 @@
 
     var ns = namespace('fp.services.user');
 
-    ns.service = function ($http, $cacheFactory) {
-        var signedIn = false,
-            cache = $cacheFactory('dataCache');
+    ns.service = function ($http) {
+        var signedIn = false;
 
-        this.signIn = function (user, success, error) {
-            var cacheKey = user.login + ':' + user.password,
-                response = cache.get(cacheKey),
-                onSuccess = function(response) {
-                    if (response.success) {
-                        signedIn = true;
-                        success(user, response);
-                    } else {
-                        error('invalidPassword');
-                    }
-                };
-
-            if (response) {
-                onSuccess(response)
-            } else {
-                $http.post('/api/user/sign-in', user, { cache: true })
-                    .success(function(response) {
-                        cache.put(cacheKey, response);
-                        onSuccess(response)
-                    }).error(error);
-            }
+        this.signIn = function (user) {
+            return $http.post('/api/user/sign-in', user, { cache: true })
+                    .then(
+                        function(response) {
+                            signedIn = true;
+                            return response;
+                        }
+                    );
         };
 
         this.signOut = function () {
@@ -39,22 +25,21 @@
             return signedIn;
         };
 
-        this.get = function (success, error) {
-            $http.get('/api/user/profile').success(success).error(error);
+        this.get = function () {
+            return $http.get('/api/user/profile');
         };
 
-        this.forgot = function (user, success, error) {
-            $http.post('/api/user/forgot', user).success(success).error(error);
+        this.forgot = function (user) {
+            return $http.post('/api/user/forgot', user);
         };
 
-        this.update = function (user, success, error) {
-            $http.post('/api/user/update', user).success(success).error(error);
+        this.update = function (user) {
+            return $http.post('/api/user/update', user);
         };
     };
 
     fp.services.$module.service('user', [
         '$http',
-        '$cacheFactory',
         ns.service
     ]);
 

@@ -4,13 +4,20 @@
     var ns = namespace('fp.services.currency');
 
     ns.service = function($http) {
-        // craete web socket connection
-        var socket = new WebSocket("ws://localhost:8081");
+        var socket;
 
         this.get = function(newPointsCallback) {
-            socket.onmessage = newPointsCallback;
-            return $http.get('api/currencies');
+            socket = new WebSocket("ws://localhost:8081");
+
+            return $http.get('api/currencies').then(function(r) {
+                socket.onmessage = newPointsCallback;
+                return r;
+            });
         };
+
+        this.closeWS = function() {
+            socket && socket.close();
+        }
     };
 
     fp.services.$module.service('currency', [

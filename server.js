@@ -16,7 +16,7 @@ var app = express(),
     PAUSE_DELAY = 1000,
     sessions = {},
     wss = new WebSocketServer({ port: 8081 }),
-    currency = new Data.Currency('currenciesData', 50),
+    currency = new Data.Currency('currenciesData', 500),
     users = new Data.User('user');
 
 
@@ -33,18 +33,14 @@ app.use('/lang', express.static('./lang'));
 wss.on('connection', function(ws) {
     var id = Math.random();
     clients[id] = ws;
-    console.log("новое соединение " + id);
 
     ws.on('message', function(message) {
-        console.log('получено сообщение ' + message);
-
         for (var key in clients) {
             clients[key].send(message);
         }
     });
 
     ws.on('close', function() {
-        console.log('соединение закрыто ' + id);
         delete clients[id];
     });
 });
@@ -135,5 +131,5 @@ app.listen(8080, function () {
 
     setInterval(function() {
         wss.broadcast(JSON.stringify(currency.addPoint()));
-    }, 5000);
+    }, 200);
 });

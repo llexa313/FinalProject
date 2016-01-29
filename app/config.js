@@ -10,13 +10,8 @@ fp.$module.config(
         $translateProvider.preferredLanguage('en');
         $translateProvider.useSanitizeValueStrategy('escape');
 
-        // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise("/sign-in");
 
-
-        var defaultParams = { message: null };
-        //
-        // Now set up the states
         $stateProvider
             .state('main', {
                 abstract: true,
@@ -35,7 +30,7 @@ fp.$module.config(
             .state('main.auth.signin', {
                 url: "/sign-in",
                 templateUrl: "app/pages/src/auth/src/tpl/signin.tpl.html",
-                params: defaultParams,
+                params: { message: null },
                 controller: 'SigninCtrl'
             })
             .state('main.auth.forgot', {
@@ -55,43 +50,16 @@ fp.$module.config(
             .state('main.dashboard.viewProfile', {
                 url: '/profile-view',
                 templateUrl: "app/pages/src/dashboard/src/tpl/profileView.tpl.html",
-                params: defaultParams,
                 controller: 'ProfileViewCtrl'
             })
             .state('main.dashboard.editProfile', {
                 url: '/profile-edit',
                 templateUrl: "app/pages/src/dashboard/src/tpl/profileEdit.tpl.html",
-                params: defaultParams,
                 controller: 'ProfileEditCtrl'
             })
             .state('main.dashboard.graph', {
                 url: '/graph',
                 templateUrl: "app/pages/src/dashboard/src/tpl/graph.tpl.html",
-                params: defaultParams,
                 controller: 'graphCtrl'
             })
-            //.state('main.profile', {
-            //    url: '/profile',
-            //    templateUrl: "app/pages/profile/tpl/profile.tpl.html"
-            //})
-            //.state('main.profile.show', {
-            //    url: "/",
-            //    templateUrl: "app/pages/profile/show/tpl/show.tpl.html",
-            //    params: defaultParams,
-            //    controller: 'ProfileShowCtrl'
-            //})
-            //.state('main.profile.edit', {
-            //    url: "/edit",
-            //    templateUrl: "app/pages/profile/edit/tpl/edit.tpl.html",
-            //    params: defaultParams,
-            //    controller: 'ProfileEditCtrl'
-            //});
-
-        // Now set up the states
-        //$stateProvider
-        //    .state('dashboard', {
-        //        url: '/',
-        //        templateUrl: 'app/pages/src/dashboard/src/tpl/dashboard.tpl.html',
-        //        controller: 'dashboardCtrl'
-        //    })
     }]);

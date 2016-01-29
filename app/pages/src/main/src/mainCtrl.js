@@ -29,14 +29,17 @@
                 return $state.go('main.sign-out');
             };
 
+            $scope.setMessage = function(m) {
+                $translate('common.messages.' + m.tpl, m.params).then(function (translation) {
+                    $scope.message = translation;
+                });
+            };
+
             $rootScope.$on('$stateChangeSuccess', function(e, state, params) {
                 $scope.message = '';
 
                 if (params && params.message) {
-                    var m = params.message;
-                    $translate('common.messages.' + m.tpl, m.params).then(function (translation) {
-                        $scope.message = translation;
-                    });
+                    $scope.setMessage(params.message);
                 }
 
                 if ($scope.isSigned()) {

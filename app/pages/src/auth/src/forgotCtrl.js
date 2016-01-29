@@ -8,12 +8,18 @@
         $scope.user = { login: '' };
 
         $scope.submit = function() {
-            user.forgot($scope.user, function (response) {
-                $state.go('^.signin', {
-                    message: {
-                        tpl: 'passwordSent',
-                        params: { newPassword: response.newPassword }
-                    }});
+            user.forgot($scope.user).then(function (response) {
+
+                if (response && response.data && response.data.success) {
+                    $state.go('^.signin', {
+                        message: {
+                            tpl: 'passwordSent',
+                            params: { newPassword: response.data.newPassword }
+                        }
+                    });
+                } else {
+                    $scope.setMessage({ tpl: 'noSuchUser' });
+                }
             }, function () {
                 //TODO: add exception handling
             })

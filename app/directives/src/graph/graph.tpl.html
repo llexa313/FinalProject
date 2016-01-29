@@ -38,6 +38,7 @@
         <g ng-repeat="serie in series" class="{{ serie.approximates ? 'approximates' : '' }}">
             <line ng-repeat="point in serie.points"
                   ng-if="$index > 0"
+                  stroke="{{ color }}"
                   ng-attr-x1="{{ pointX(serie.points[$index - 1]) }}%"
                   ng-attr-y1="{{ pointY(serie.points[$index - 1]) }}%"
                   ng-attr-x2="{{ pointX(point) }}%"
