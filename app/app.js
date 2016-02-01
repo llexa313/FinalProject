@@ -23,6 +23,7 @@ fp.$module = angular.module('task3', [
     'ui.router',
     'pascalprecht.translate',
     'ngSanitize',
-    'fp.interceptors',
-    'fp.pages'
+    'fp.services.loggerInterceptor',
+    'fp.pages',
+    'fp.decorators'
 ]);

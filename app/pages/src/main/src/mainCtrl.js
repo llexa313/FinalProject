@@ -2,10 +2,14 @@
     'use strict';
 
     var ns = namespace('fp.pages.main');
-    ns.$module = angular.module('fp.pages.main', [ 'fp.services' ]);
+    ns.$module = angular.module('fp.pages.main', [
+        'fp.services.user'
 
-    ns.$module.controller('MainCtrl', [ '$rootScope', '$scope', '$timeout', '$state', 'user', '$translate', '$http',
-        function($rootScope, $scope, $timeout, $state, user, $translate, $http) {
+    ]);
+
+    ns.$module.controller('MainCtrl', [
+        '$rootScope', '$scope', '$timeout', '$state', 'user', '$translate', '$http', '$log',
+        function($rootScope, $scope, $timeout, $state, user, $translate, $http, $log) {
             var promise;
 
             $scope.lang = $translate.preferredLanguage();

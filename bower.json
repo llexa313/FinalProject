@@ -8,6 +8,7 @@
     "ui-router": "0.2.15",
     "angular-translate": "2.8.1",
     "angular-translate-loader-static-files": "~2.8.1",
-    "angular-animate": "1.4.9"
+    "angular-animate": "1.4.9",
+    "moment": "2.11.1"
   }
 }

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="app/css/app.css" />
 
     <script src="components/lodash/dist/lodash.min.js"></script>
+    <script src="components/moment/moment.js"></script>
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-animate/angular-animate.min.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.min.js"></script>
@@ -17,17 +18,20 @@
     <script src="components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
 
     <script src="app/app.js"></script>
-    <script src="app/config.js"></script>
+    <script src="app/stateConfig.js"></script>
+    <script src="app/translateConfig.js"></script>
+    <script src="app/httpProviderConfig.js"></script>
+
+    <script src="app/common/decorators/fp.decorators.js"></script>
+    <script src="app/common/decorators/src/fp.decorators.logger.js"></script>
 
     <script src="app/services/fp.services.js"></script>
     <script src="app/services/src/currency.js"></script>
     <script src="app/services/src/user.js"></script>
+    <script src="app/services/src/loggerInterceptor.js"></script>
 
-    <script src="app/directives/src/graph/fp.directives.graph.js"></script>
     <script src="app/directives/fp.directives.js"></script>
-
-    <script src="app/interceptors/src/fp.interceptors.logger.js"></script>
-    <script src="app/interceptors/fp.interceptors.js"></script>
+    <script src="app/directives/src/graph/fp.directives.graph.js"></script>
 
     <script src="app/pages/fp.pages.js"></script>
 

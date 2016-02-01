@@ -20,7 +20,7 @@
         }
     };
 
-    fp.services.$module.service('currency', [
+    ns.$module = angular.module('fp.services.currency', [
         '$http',
         ns.service
     ]);

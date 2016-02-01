@@ -2,6 +2,7 @@
     'use strict';
 
     var ns = namespace('fp.services.user');
+    ns.$module = angular.module('fp.services.user', []);
 
     ns.service = function ($http) {
         var signedIn = false;
@@ -38,7 +39,7 @@
         };
     };
 
-    fp.services.$module.service('user', [
+    ns.$module.service('user', [
         '$http',
         ns.service
     ]);
