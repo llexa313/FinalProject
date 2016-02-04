@@ -126,10 +126,12 @@ app.post('/api/user/update', pause(PAUSE_DELAY), function(req, res) {
 });
 
 // listen (start app with node server.js) ======================================
-app.listen(8080, function () {
-    console.log('Server started. Open http://localhost:8080/ !');
+var server = app.listen(3000, function () {
+    console.log('Server started. Open http://localhost:3000/ !');
 
     setInterval(function() {
         wss.broadcast(JSON.stringify(currency.addPoint()));
     }, 200);
 });
+
+module.exports = server;

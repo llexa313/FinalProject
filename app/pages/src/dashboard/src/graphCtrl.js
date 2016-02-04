@@ -3,7 +3,10 @@
 
     var ns = namespace('fp.pages.dashboard');
 
-    ns.$module = angular.module('fp.pages.dashboard.graph', [ 'fp.services' ]);
+    ns.$module = angular.module('fp.pages.dashboard.graph', [
+        'fp.services.user',
+        'fp.services.currency'
+    ]);
 
     ns.controller = function($scope, currency, user, $state) {
         //if (!user.isSignedIn()) {

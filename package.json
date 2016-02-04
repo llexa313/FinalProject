@@ -1,6 +1,6 @@
 {
   "name": "FinalProject",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/llexa313/FinalProject.git"
@@ -14,6 +14,13 @@
     "md5": "^2.0.0",
     "node-cache": "3.0.1",
     "ws": "^1.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-protractor": "0.0.12",
+    "gulp-jasmine": "^2.2.1",
+    "jasmine-reporters": "^2.1.1",
+    "nconf": "^0.8.4"
   },
   "scripts": {
     "postinstall": "bower install"

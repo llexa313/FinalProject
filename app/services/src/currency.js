@@ -2,6 +2,7 @@
     'use strict';
 
     var ns = namespace('fp.services.currency');
+    ns.$module = angular.module('fp.services.currency', [ ]);
 
     ns.service = function($http) {
         var socket;
@@ -20,7 +21,7 @@
         }
     };
 
-    ns.$module = angular.module('fp.services.currency', [
+    ns.$module.service('currency', [
         '$http',
         ns.service
     ]);

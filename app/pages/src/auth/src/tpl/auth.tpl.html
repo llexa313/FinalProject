@@ -1,8 +1,8 @@
 <div class="auth-container">
     <div class="{{ isHttpPending() ? 'disabled' : '' }}" >
         <div class="pull-right switch-lang">
-            <span ng-class="{ active: lang === 'ru' }" ng-click="switchLang('ru')" class="btn btn-default btn-sm">Русский</span>
-            <span ng-class="{ active: lang === 'en' }" ng-click="switchLang('en')" class="btn btn-default btn-sm">English</span>
+            <span ng-class="{ active: lang === 'ru' }" ng-click="switchLang('ru')" class="btn btn-default btn-sm lang-ru">Русский</span>
+            <span ng-class="{ active: lang === 'en' }" ng-click="switchLang('en')" class="btn btn-default btn-sm lang-en">English</span>
         </div>
         <div class="bg-info message">{{ message }}</div>
 
